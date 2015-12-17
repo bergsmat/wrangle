@@ -112,6 +112,7 @@ unsorted.grouped_df <- function(x,...){
 #' Counts records with NA values of grouping variables.
 #' @param x data.frame
 #' @param ... ignored
+#' @export
 #' @return numeric
 
 naGroups.grouped_df <- function(x, ...){
@@ -132,6 +133,7 @@ naGroups.grouped_df <- function(x, ...){
 #' @param x data.frame
 #' @param ... ignored
 #' @return grouped_df
+#' @export
 dupGroups.grouped_df <- function(x, ...){
   key <- key(x)
   if (!all(key %in% names(x))) 
