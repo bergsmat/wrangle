@@ -43,6 +43,39 @@ itemize <-         function(x,...)x %>%  detect(...) %>%  distinct
 # @describeIn wrangle
 enumerate <-      function(x,...)x %>%  detect(...) %>%  summarise(count=n())
 
+#' Fetch the key.
+#' 
+#' Fetches the key of an object.
+#' @param x object of dispatch
+#' @param ... other arguments
+key <-            function(x,...)UseMethod('key')
+#' Calculate naGroups.
+#' 
+#' Calculates naGroups.
+#' @param x object of dispatch
+#' @param ... other arguments
+naGroups <-       function(x,...)UseMethod('naGroups')
+#' Calculate dupGroups.
+#' 
+#' Calculates dupGroups.
+#' @param x object of dispatch
+#' @param ... other arguments
+dupGroups <-      function(x,...)UseMethod('dupGroups')
+#' Report status.
+#' 
+#' Reports the status of an object.
+#' @param x object of dispatch
+#' @param ... other arguments
+#' @export
+status <-         function(x,...)UseMethod('status')
+#' Show unsorted elements.
+#' 
+#' Shows unsorted elements.
+#' @param x object of dispatch
+#' @param ... other arguments
+#' @export
+unsorted <-       function(x,...)UseMethod('unsorted')
+
 #' Fetch the key for a grouped_df as character vector
 #' 
 #' Fetches the key for a grouped_df as character vector
@@ -50,11 +83,6 @@ enumerate <-      function(x,...)x %>%  detect(...) %>%  summarise(count=n())
 #' @param ... columns to show
 #' @return character
 
-key <-            function(x,...)UseMethod('key')
-naGroups <-       function(x,...)UseMethod('naGroups')
-dupGroups <-      function(x,...)UseMethod('dupGroups')
-status <-         function(x,...)UseMethod('status')
-unsorted <-       function(x,...)UseMethod('unsorted')
 key.grouped_df <- function(x,...)sapply(groups(x),as.character)
 
 #' Find records whose relative positons would change if sorted.
@@ -131,6 +159,28 @@ status.grouped_df <- function (x, ...)
   invisible(x)
 }
 
+#' Show na elements.
+#' 
+#' Shows na elements.
+#' @param x object of dispatch
+#' @param ... other arguments
+#' @export
+na  <-             function(x, ...)UseMethod('na')
+#' Show duplicate or duplicated elements.
+#' 
+#' Shows duplicate or duplicated elements.
+#' @param x object of dispatch
+#' @param ... other arguments
+#' @export
+dup <-             function(x,...)UseMethod('dup')
+#' Show na, duplicate, or duplicated elements.
+#' 
+#' Shows na, duplicate, or duplicated elements.
+#' @param x object of dispatch
+#' @param ... other arguments
+#' @export
+weak <-            function(x,...)UseMethod('weak')
+
 #' Show records with NA values of grouping variables.
 #' 
 #' Shows records with NA values of grouping variables.
@@ -140,9 +190,6 @@ status.grouped_df <- function (x, ...)
 #' @return grouped_df
 # @describeIn wrangle
 
-na  <-             function(x, ...)UseMethod('na')
-dup <-             function(x,...)UseMethod('dup')
-weak <-            function(x,...)UseMethod('weak')
 na.grouped_df <-   function(x,...)x[naGroups(x),]
 
 #' Show records with duplicate or duplicated values of grouping variables.
@@ -279,14 +326,10 @@ ignore <- function(x,y,...){
 #' Drop columns in x that are entirely NA.
 #' 
 #' Drops columns in x that are entirely NA.
-#' @param x data.frame
-#' @param ... ingored
-#' @export
-#' @return data.frame
+#' @param x object of dispatch
+#' @param ... passed
 # @describeIn wrangle
-
 informative <- function(x,...)UseMethod('informative')
-informative.data.frame <- function(x,...)x[,sapply(x,function(col)any(!is.na(col))),drop=FALSE]
 
 #' Drop columns in x that are entirely NA.
 #' 
@@ -296,4 +339,7 @@ informative.data.frame <- function(x,...)x[,sapply(x,function(col)any(!is.na(col
 #' @export
 #' @return data.frame
 # @describeIn wrangle
+
+informative.data.frame <- function(x,...)x[,sapply(x,function(col)any(!is.na(col))),drop=FALSE]
+
 

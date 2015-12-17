@@ -2,19 +2,16 @@
 % Please edit documentation in R/wrangle.R
 \name{na}
 \alias{na}
-\title{Show records with NA values of grouping variables.}
+\title{Show na elements.}
 \usage{
 na(x, ...)
 }
 \arguments{
-\item{x}{data.frame}
+\item{x}{object of dispatch}
 
-\item{...}{ignored}
-}
-\value{
-grouped_df
+\item{...}{other arguments}
 }
 \description{
-Shows records with NA values of grouping variables.
+Shows na elements.
 }
 
