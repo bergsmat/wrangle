@@ -287,6 +287,20 @@ anti_join_.grouped_df <- function (.data, ...)
   y <- dplyr::group_by_(y, .dots=groups(.data))
   y
 }
+#' Semi-join a grouped_df.
+#' 
+#' Semi-joins a grouped_df.
+#' @param .data data.frame
+#' @param ... passed
+#' @export
+#' @return grouped_df
+# @describeIn wrangle
+semi_join_.grouped_df <- function (.data, ...) 
+{
+  y <- NextMethod()
+  y <- dplyr::group_by_(y, .dots=groups(.data))
+  y
+}
 #' Test whether item has only one unique value.
 #' 
 #' Tests whether item has only one unique value.
