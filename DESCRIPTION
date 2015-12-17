@@ -1,0 +1,11 @@
+Package: wrangle
+Type: Package
+Title: A Systematic Data Wrangling Idiom
+Version: 0.1
+Date: 2015-12-17
+Author: Tim Bergsma
+Maintainer: Tim Bergsma <bergsmat@gmail.com>
+Description: Supports systematic scrutiny, modification, and integration of data.
+License: GPL-2
+LazyData: TRUE
+Imports: dplyr, tidyr, magrittr

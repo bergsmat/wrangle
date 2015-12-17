@@ -5,11 +5,12 @@
 #' @param ... ignored
 #' @export
 #' @return grouped_df
-#' @describeIn status
+# @describeIn wrangle
 
 #'
 #group_by_all <-   function(x,...)x %>%  group_by_(.dots=as.list(names(x)))
 group_by_all <-   function(x,...)do.call(group_by,c(list(.data=x),lapply(names(x),as.symbol)))
+
 
 #' Sort column subsets.
 #' 
@@ -18,7 +19,7 @@ group_by_all <-   function(x,...)do.call(group_by,c(list(.data=x),lapply(names(x
 #' @param ... columns to sort
 #' @export
 #' @return grouped_df
-#' @describeIn status
+# @describeIn wrangle
 detect <-  function(x,...)x %>%  ungroup %>%  transmute(...) %>%  group_by_all %>%  arrange
 
 
@@ -29,7 +30,7 @@ detect <-  function(x,...)x %>%  ungroup %>%  transmute(...) %>%  group_by_all %
 #' @param ... columns to show
 #' @export
 #' @return grouped_df
-#' @describeIn status
+# @describeIn wrangle
 itemize <-         function(x,...)x %>%  detect(...) %>%  distinct
 
 #' Count unique combinations of items in specified columns.
@@ -39,7 +40,7 @@ itemize <-         function(x,...)x %>%  detect(...) %>%  distinct
 #' @param ... columns to show
 #' @export
 #' @return grouped_df
-#' @describeIn status
+# @describeIn wrangle
 enumerate <-      function(x,...)x %>%  detect(...) %>%  summarise(count=n())
 
 #' Fetch the key for a grouped_df as character vector
@@ -63,7 +64,7 @@ key.grouped_df <- function(x,...)sapply(groups(x),as.character)
 #' @param ... ignored
 #' @export
 #' @return grouped_df
-#' @describeIn status
+# @describeIn wrangle
 
 unsorted.grouped_df <- function(x,...){
   x$original_ <- seq_len(nrow(x))
@@ -118,7 +119,7 @@ dupGroups.grouped_df <- function(x, ...){
 #' @param ... ignored
 #' @export
 #' @return returns x invisibly
-#' @describeIn status
+# @describeIn wrangle
 status.grouped_df <- function (x, ...) 
 {
   cat("Source: local data frame ", dplyr::dim_desc(x), "\n", sep = "")
@@ -137,7 +138,7 @@ status.grouped_df <- function (x, ...)
 #' @param ... ignored
 #' @export
 #' @return grouped_df
-#' @describeIn status
+# @describeIn wrangle
 
 na  <-             function(x, ...)UseMethod('na')
 dup <-             function(x,...)UseMethod('dup')
@@ -151,7 +152,7 @@ na.grouped_df <-   function(x,...)x[naGroups(x),]
 #' @param ... ignored
 #' @export
 #' @return grouped_df
-#' @describeIn status
+# @describeIn wrangle
 dup.grouped_df <-  function(x,...)x[dupGroups(x),]
 
 
@@ -162,17 +163,21 @@ dup.grouped_df <-  function(x,...)x[dupGroups(x),]
 #' @param ... ignored
 #' @export
 #' @return grouped_df
-#' @describeIn status
+# @describeIn wrangle
 weak.grouped_df <- function(x,...)x[naGroups(x) | dupGroups(x),]
 
 #' Unstack a grouped_df.
 #' 
 #' Unstacks a grouped_df.
-#' @param x data.frame
-#' @param ... passed
+#' @param data passed
+#' @param key_col passed
+#' @param value_col passed
+#' @param fill passed
+#' @param convert passed
+#' @param drop passed
 #' @export
 #' @return grouped_df
-#' @describeIn status
+# @describeIn wrangle
 spread_.grouped_df <- function (
   data, 
   key_col, 
@@ -192,11 +197,11 @@ spread_.grouped_df <- function (
 #' Mutate a grouped_df.
 #' 
 #' Mutates a grouped_df.
-#' @param x data.frame
+#' @param .data data.frame
 #' @param ... passed
 #' @export
 #' @return grouped_df
-#' @describeIn status
+# @describeIn wrangle
 mutate_.grouped_df <- function (.data, ...) 
 {
   y <- NextMethod()
@@ -207,11 +212,11 @@ mutate_.grouped_df <- function (.data, ...)
 #' Filter a grouped_df.
 #' 
 #' Filters a grouped_df.
-#' @param x data.frame
+#' @param .data data.frame
 #' @param ... passed
 #' @export
 #' @return grouped_df
-#' @describeIn status
+# @describeIn wrangle
 filter_.grouped_df <- function (.data, ...) 
 {
   y <- NextMethod()
@@ -222,15 +227,15 @@ filter_.grouped_df <- function (.data, ...)
 #' Anti-join a grouped_df.
 #' 
 #' Anti-joins a grouped_df.
-#' @param x data.frame
+#' @param .data data.frame
 #' @param ... passed
 #' @export
 #' @return grouped_df
-#' @describeIn status
-anti_join.grouped_df <- function (.data, ...) 
+# @describeIn wrangle
+anti_join_.grouped_df <- function (.data, ...) 
 {
   y <- NextMethod()
-  y <- group_by_(y, .dots=groups(.data))
+  y <- dplyr::group_by_(y, .dots=groups(.data))
   y
 }
 #' Test whether item has only one unique value.
@@ -249,7 +254,7 @@ singular <- function(x,...)length(unique(x)) == 1
 #' @param ... ignored
 #' @export
 #' @return data.frame
-#' @describeIn status
+# @describeIn wrangle
 static <- function(x,...){
   s <- x %>% summarise_each(funs(singular))
   nms <- names(s)[sapply(s,function(col)all(col == TRUE))]
@@ -266,7 +271,7 @@ static <- function(x,...){
 #' @param ... ingored
 #' @export
 #' @return data.frame
-#' @describeIn status
+# @describeIn wrangle
 ignore <- function(x,y,...){
   x[,! names(x) %in% names(y)]
 }
@@ -278,7 +283,7 @@ ignore <- function(x,y,...){
 #' @param ... ingored
 #' @export
 #' @return data.frame
-#' @describeIn status
+# @describeIn wrangle
 
 informative <- function(x,...)UseMethod('informative')
 informative.data.frame <- function(x,...)x[,sapply(x,function(col)any(!is.na(col))),drop=FALSE]
@@ -290,5 +295,5 @@ informative.data.frame <- function(x,...)x[,sapply(x,function(col)any(!is.na(col
 #' @param ... ingored
 #' @export
 #' @return data.frame
-#' @describeIn status
+# @describeIn wrangle
 
