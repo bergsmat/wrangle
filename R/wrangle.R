@@ -215,98 +215,6 @@ dup.grouped_df <-  function(x,...)x[dupGroups(x),]
 # @describeIn wrangle
 weak.grouped_df <- function(x,...)x[naGroups(x) | dupGroups(x),]
 
-#' Unstack a grouped_df.
-#' 
-#' Unstacks a grouped_df.
-#' @param data passed
-#' @param key_col passed
-#' @param value_col passed
-#' @param fill passed
-#' @param convert passed
-#' @param drop passed
-#' @export
-#' @return grouped_df
-# @describeIn wrangle
-spread_.grouped_df <- function (
-  data, 
-  key_col, 
-  value_col, 
-  fill = NA, 
-  convert = FALSE, 
-  drop = TRUE
-) {
-  y <- NextMethod()
-  grp <- groups(data)
-  good <- sapply(grp,function(g)g != key_col)
-  grp <- grp[good]
-  y <- group_by_(y, .dots=grp)
-  y  
-}
-
-#' Mutate a grouped_df.
-#' 
-#' Mutates a grouped_df.
-#' @param .data data.frame
-#' @param ... passed
-#' @export
-#' @return grouped_df
-# @describeIn wrangle
-mutate_.grouped_df <- function (.data, ...) 
-{
-  y <- NextMethod()
-  y <- group_by_(y, .dots=groups(.data))
-  y
-}
-
-#' Filter a grouped_df.
-#' 
-#' Filters a grouped_df.
-#' @param .data data.frame
-#' @param ... passed
-#' @export
-#' @return grouped_df
-# @describeIn wrangle
-filter_.grouped_df <- function (.data, ...) 
-{
-  y <- NextMethod()
-  y <- group_by_(y, .dots=groups(.data))
-  y
-}
-
-#' Anti-join a grouped_df.
-#' 
-#' Anti-joins a grouped_df.
-#' @param .data data.frame
-#' @param ... passed
-#' @export
-#' @return grouped_df
-# @describeIn wrangle
-anti_join_.grouped_df <- function (.data, ...) 
-{
-  y <- NextMethod()
-  y <- dplyr::group_by_(y, .dots=groups(.data))
-  y
-}
-#' Semi-join a grouped_df.
-#' 
-#' Semi-joins a grouped_df.
-#' @param .data data.frame
-#' @param ... passed
-#' @export
-#' @return grouped_df
-# @describeIn wrangle
-semi_join_.grouped_df <- function (.data, ...) 
-{
-  y <- NextMethod()
-  y <- dplyr::group_by_(y, .dots=groups(.data))
-  y
-}
-#' Test whether item has only one unique value.
-#' 
-#' Tests whether item has only one unique value.
-#' @param x vector
-#' @param ... ignored
-#' @return logical
 
 singular <- function(x,...)length(unique(x)) == 1
 
@@ -358,4 +266,96 @@ informative <- function(x,...)UseMethod('informative')
 
 informative.data.frame <- function(x,...)x[,sapply(x,function(col)any(!is.na(col))),drop=FALSE]
 
+# #' Unstack a grouped_df.
+# #' 
+# #' Unstacks a grouped_df.
+# #' @param data passed
+# #' @param key_col passed
+# #' @param value_col passed
+# #' @param fill passed
+# #' @param convert passed
+# #' @param drop passed
+# #' @export
+# #' @return grouped_df
+# # @describeIn wrangle
+# spread_.grouped_df <- function (
+#   data, 
+#   key_col, 
+#   value_col, 
+#   fill = NA, 
+#   convert = FALSE, 
+#   drop = TRUE
+# ) {
+#   y <- NextMethod()
+#   grp <- groups(data)
+#   good <- sapply(grp,function(g)g != key_col)
+#   grp <- grp[good]
+#   y <- group_by_(y, .dots=grp)
+#   y  
+# }
+# 
+# #' Mutate a grouped_df.
+# #' 
+# #' Mutates a grouped_df.
+# #' @param .data data.frame
+# #' @param ... passed
+# #' @export
+# #' @return grouped_df
+# # @describeIn wrangle
+# mutate_.grouped_df <- function (.data, ...) 
+# {
+#   y <- NextMethod()
+#   y <- group_by_(y, .dots=groups(.data))
+#   y
+# }
+# 
+# #' Filter a grouped_df.
+# #' 
+# #' Filters a grouped_df.
+# #' @param .data data.frame
+# #' @param ... passed
+# #' @export
+# #' @return grouped_df
+# # @describeIn wrangle
+# filter_.grouped_df <- function (.data, ...) 
+# {
+#   y <- NextMethod()
+#   y <- group_by_(y, .dots=groups(.data))
+#   y
+# }
+# 
+# #' Anti-join a grouped_df.
+# #' 
+# #' Anti-joins a grouped_df.
+# #' @param .data data.frame
+# #' @param ... passed
+# #' @export
+# #' @return grouped_df
+# # @describeIn wrangle
+# anti_join_.grouped_df <- function (.data, ...) 
+# {
+#   y <- NextMethod()
+#   y <- dplyr::group_by_(y, .dots=groups(.data))
+#   y
+# }
+# #' Semi-join a grouped_df.
+# #' 
+# #' Semi-joins a grouped_df.
+# #' @param .data data.frame
+# #' @param ... passed
+# #' @export
+# #' @return grouped_df
+# # @describeIn wrangle
+# semi_join_.grouped_df <- function (.data, ...) 
+# {
+#   y <- NextMethod()
+#   y <- dplyr::group_by_(y, .dots=groups(.data))
+#   y
+# }
+# #' Test whether item has only one unique value.
+# #' 
+# #' Tests whether item has only one unique value.
+# #' @param x vector
+# #' @param ... ignored
+# #' @return logical
 
