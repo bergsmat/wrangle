@@ -252,6 +252,7 @@ ignore <- function(x,y,...){
 #' Drops columns in x that are entirely NA.
 #' @param x object of dispatch
 #' @param ... passed
+#' @export
 # @describeIn wrangle
 informative <- function(x,...)UseMethod('informative')
 
