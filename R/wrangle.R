@@ -31,7 +31,7 @@ detect <-  function(x,...)x %>%  ungroup %>%  transmute(...) %>%  group_by_all %
 #' @export
 #' @return grouped_df
 # @describeIn wrangle
-itemize <-         function(x,...)x %>%  detect(...) %>%  distinct
+itemize <-         function(x,...)x %>%  detect(...) %>%  unique
 
 #' Count unique combinations of items in specified columns.
 #' 
@@ -230,7 +230,7 @@ static <- function(x,...){
   s <- x %>% summarise_each(funs(singular))
   nms <- names(s)[sapply(s,function(col)all(col == TRUE))]
   x <- select_(x, .dots=as.list(nms))
-  x <- x %>% distinct
+  x <- x %>% unique
   x
 }
 
