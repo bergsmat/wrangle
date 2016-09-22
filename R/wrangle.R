@@ -1,3 +1,17 @@
+#' Arrange by groups.
+#'
+#' As of 0.5, dplyr::arrange ignores groups. This function gives the old behavior as a method for generic base::sort. Borrowed from Ax3man at https://github.com/hadley/dplyr/issues/1206.
+#' @param x grouped_df
+#' @param decreasing logical (ignored)
+#' @param ... further sort criteria
+#' @export
+#' @return grouped_df
+# @describeIn wrangle
+
+sort.grouped_df <- function(x, decreasing = FALSE, ...) {
+  dplyr::arrange_(x, .dots = c(groups(x), lazyeval::lazy_dots(...)))
+}
+
 #' Group by all columns.
 #'
 #' Groups by all columns.
@@ -20,7 +34,7 @@ group_by_all <-   function(x,...)do.call(group_by,c(list(.data=x),lapply(names(x
 #' @export
 #' @return grouped_df
 # @describeIn wrangle
-detect <-  function(x,...)x %>%  ungroup %>%  transmute(...) %>%  group_by_all %>%  arrange
+detect <-  function(x,...)x %>%  ungroup %>%  transmute(...) %>%  group_by_all %>%  sort
 
 
 #' Show unique combinations of items in specified columns
@@ -98,7 +112,7 @@ unsorted.grouped_df <- function(x,...){
   x$original_ <- seq_len(nrow(x))
   x$leads_ <- lead(x$original_,default=Inf)
   x$lags_ <- lag(x$original_,default=-Inf)
-  x %<>% arrange
+  x %<>% sort
   x$now_leads_ <- lead(x$original_,default=Inf)
   x$now_lags_ <- lag(x$original_,default=-Inf)
   x$static_ <- with(x, leads_ == now_leads_ & lags_ == now_lags_)
