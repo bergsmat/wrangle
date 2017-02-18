@@ -17,4 +17,3 @@ grouped_df
 \description{
 Shows records with NA, duplicate or duplicated values of grouping variables.
 }
-

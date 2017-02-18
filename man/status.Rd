@@ -14,4 +14,7 @@ status(x, ...)
 \description{
 Reports the status of an object.
 }
-
+\examples{
+library(dplyr)
+status(group_by(Theoph, Subject, Time))
+}

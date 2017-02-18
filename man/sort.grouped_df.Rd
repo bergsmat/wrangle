@@ -19,4 +19,7 @@ grouped_df
 \description{
 As of 0.5, dplyr::arrange ignores groups. This function gives the old behavior as a method for generic base::sort. Borrowed from Ax3man at https://github.com/hadley/dplyr/issues/1206.
 }
-
+\examples{
+library(dplyr)
+head(sort(group_by(Theoph, Subject, Time)))
+}

@@ -17,4 +17,3 @@ data.frame
 \description{
 Finds unique records for subset of columns with one unique value.
 }
-

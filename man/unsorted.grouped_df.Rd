@@ -15,6 +15,8 @@
 grouped_df
 }
 \description{
-Finds records whose relative positons would change if sorted.
+Finds records whose relative positons would change if sorted, i.e. records that would not have the same nearest neighbors (before and after).
 }
-
+\seealso{
+\code{\link{na}} \code{\link{dup}}
+}

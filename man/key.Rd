@@ -14,4 +14,3 @@ key(x, ...)
 \description{
 Fetches the key of an object.
 }
-

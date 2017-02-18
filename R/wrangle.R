@@ -1,11 +1,19 @@
+globalVariables(c('static_','original_'))
+
 #' Arrange by groups.
 #'
 #' As of 0.5, dplyr::arrange ignores groups. This function gives the old behavior as a method for generic base::sort. Borrowed from Ax3man at https://github.com/hadley/dplyr/issues/1206.
 #' @param x grouped_df
 #' @param decreasing logical (ignored)
 #' @param ... further sort criteria
+#' @import dplyr magrittr
+#' @importFrom tidyr spread
+#' @importFrom tidyr spread_
 #' @export
 #' @return grouped_df
+#' @examples
+#' library(dplyr)
+#' head(sort(group_by(Theoph, Subject, Time)))
 # @describeIn wrangle
 
 sort.grouped_df <- function(x, decreasing = FALSE, ...) {
@@ -44,6 +52,8 @@ detect <-  function(x,...)x %>%  ungroup %>%  transmute(...) %>%  group_by_all %
 #' @param ... columns to show
 #' @export
 #' @return grouped_df
+#' @examples 
+#' itemize(mtcars, cyl, gear, carb)
 # @describeIn wrangle
 itemize <-         function(x,...)x %>%  detect(...) %>%  unique
 
@@ -54,6 +64,8 @@ itemize <-         function(x,...)x %>%  detect(...) %>%  unique
 #' @param ... columns to show
 #' @export
 #' @return grouped_df
+#' @examples
+#' enumerate(mtcars, cyl, gear, carb)
 # @describeIn wrangle
 enumerate <-      function(x,...)x %>%  detect(...) %>%  summarise(count=n())
 
@@ -81,12 +93,16 @@ dupGroups <-      function(x,...)UseMethod('dupGroups')
 #' @param x object of dispatch
 #' @param ... other arguments
 #' @export
+#' @examples 
+#' library(dplyr)
+#' status(group_by(Theoph, Subject, Time))
 status <-         function(x,...)UseMethod('status')
 #' Show unsorted elements.
 #' 
 #' Shows unsorted elements.
 #' @param x object of dispatch
 #' @param ... other arguments
+#' @seealso \code{\link{unsorted.grouped_df}}
 #' @export
 unsorted <-       function(x,...)UseMethod('unsorted')
 
@@ -101,10 +117,11 @@ key.grouped_df <- function(x,...)sapply(groups(x),as.character)
 
 #' Find records whose relative positons would change if sorted.
 #' 
-#' Finds records whose relative positons would change if sorted.
+#' Finds records whose relative positons would change if sorted, i.e. records that would not have the same nearest neighbors (before and after).
 #' @param x data.frame
 #' @param ... ignored
 #' @export
+#' @seealso \code{\link{na}} \code{\link{dup}}
 #' @return grouped_df
 # @describeIn wrangle
 
@@ -143,7 +160,7 @@ naGroups.grouped_df <- function(x, ...){
 
 #' Count records with with duplicate or duplicated values of grouping variables.
 #' 
-#' Counts records with with duplicate or duplicated values of grouping variables.
+#' Counts records with with duplicate or duplicated values of grouping variables. If b follows a and and is the same, then b is a duplicate, a is duplicated, and both are shown.
 #' @param x data.frame
 #' @param ... ignored
 #' @return grouped_df
@@ -162,7 +179,20 @@ dupGroups.grouped_df <- function(x, ...){
 #' @param x data.frame
 #' @param ... ignored
 #' @export
+#' @aliases wrangle
 #' @return returns x invisibly
+#' @examples 
+#' library(dplyr)
+#' status(group_by(Theoph, Subject, Time))
+#' @seealso 
+#' \code{\link{na}} 
+#' \code{\link{dup}}
+#' \code{\link{unsorted}}
+#' \code{\link{informative}}
+#' \code{\link{ignore}}
+#' \code{\link{itemize}}
+#' \code{\link{enumerate}}
+#' \code{\link{sort.grouped_df}}
 # @describeIn wrangle
 status.grouped_df <- function (x, ...) 
 {
@@ -180,6 +210,7 @@ status.grouped_df <- function (x, ...)
 #' Shows na elements.
 #' @param x object of dispatch
 #' @param ... other arguments
+#' @seealso \code{\link{na.grouped_df}} \code{\link{dup}} \code{\link{weak}} \code{\link{unsorted}}
 #' @export
 na  <-             function(x, ...)UseMethod('na')
 #' Show duplicate or duplicated elements.
@@ -187,6 +218,7 @@ na  <-             function(x, ...)UseMethod('na')
 #' Shows duplicate or duplicated elements.
 #' @param x object of dispatch
 #' @param ... other arguments
+#' @seealso \code{\link{dup.grouped_df}} \code{\link{na}} \code{\link{weak}}  \code{\link{unsorted}}
 #' @export
 dup <-             function(x,...)UseMethod('dup')
 #' Show na, duplicate, or duplicated elements.
@@ -194,6 +226,7 @@ dup <-             function(x,...)UseMethod('dup')
 #' Shows na, duplicate, or duplicated elements.
 #' @param x object of dispatch
 #' @param ... other arguments
+#' @seealso \code{\link{weak.grouped_df}}
 #' @export
 weak <-            function(x,...)UseMethod('weak')
 
@@ -215,6 +248,9 @@ na.grouped_df <-   function(x,...)x[naGroups(x),]
 #' @param ... ignored
 #' @export
 #' @return grouped_df
+#' @examples 
+#' library(dplyr)
+#' dup(group_by(mtcars, mpg))
 # @describeIn wrangle
 dup.grouped_df <-  function(x,...)x[dupGroups(x),]
 
@@ -258,7 +294,7 @@ static <- function(x,...){
 #' @return data.frame
 # @describeIn wrangle
 ignore <- function(x,y,...){
-  x[,! names(x) %in% names(y)]
+  x[,! names(x) %in% names(y),drop=FALSE]
 }
 
 #' Drop columns in x that are entirely NA.
@@ -266,6 +302,11 @@ ignore <- function(x,y,...){
 #' Drops columns in x that are entirely NA.
 #' @param x object of dispatch
 #' @param ... passed
+#' @seealso \code{\link{informative.data.frame}}
+#' @examples 
+#' head(Theoph)
+#' Theoph$Dose <- NA
+#' head(informative(Theoph))
 #' @export
 # @describeIn wrangle
 informative <- function(x,...)UseMethod('informative')

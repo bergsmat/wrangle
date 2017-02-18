@@ -19,4 +19,3 @@ data.frame
 \description{
 Drops columns in x that are present in y.
 }
-

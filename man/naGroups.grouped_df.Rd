@@ -17,4 +17,3 @@ numeric
 \description{
 Counts records with NA values of grouping variables.
 }
-

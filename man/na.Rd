@@ -14,4 +14,6 @@ na(x, ...)
 \description{
 Shows na elements.
 }
-
+\seealso{
+\code{\link{na.grouped_df}} \code{\link{dup}} \code{\link{weak}} \code{\link{unsorted}}
+}

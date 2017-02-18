@@ -14,4 +14,11 @@ informative(x, ...)
 \description{
 Drops columns in x that are entirely NA.
 }
-
+\examples{
+head(Theoph)
+Theoph$Dose <- NA
+head(informative(Theoph))
+}
+\seealso{
+\code{\link{informative.data.frame}}
+}

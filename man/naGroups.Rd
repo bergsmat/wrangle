@@ -14,4 +14,3 @@ naGroups(x, ...)
 \description{
 Calculates naGroups.
 }
-

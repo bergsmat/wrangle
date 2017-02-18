@@ -6,11 +6,20 @@ Date: 2017-02-18
 Author: Tim Bergsma
 Maintainer: Tim Bergsma <bergsmat@gmail.com>
 Description: Supports systematic scrutiny, modification, and integration of
-    data.
+    data. The function status() counts rows that have missing values in 
+    grouping columns (returned by na() ), have non-unique combinations of 
+    grouping columns (returned by dup() ), and that are not locally sorted
+    (returned by unsorted() ). Functions enumerate() and itemize() give 
+    sorted unique combinations of columns, with or without occurence counts,
+    respectively. Function ignore() drops columns in x that are present in y,
+    and informative() drops columns in x that are entirely NA. Data that have
+    defined unique combinations of grouping values behave more predicatably
+    during merge operations.
 License: GPL-3
 LazyData: TRUE
 Imports:
     dplyr,
     tidyr,
+    lazyeval,
     magrittr
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.1

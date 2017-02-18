@@ -17,4 +17,3 @@ grouped_df
 \description{
 Sort column subsets.
 }
-

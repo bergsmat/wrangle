@@ -14,4 +14,6 @@ dup(x, ...)
 \description{
 Shows duplicate or duplicated elements.
 }
-
+\seealso{
+\code{\link{dup.grouped_df}} \code{\link{na}} \code{\link{weak}}  \code{\link{unsorted}}
+}

@@ -14,4 +14,6 @@ unsorted(x, ...)
 \description{
 Shows unsorted elements.
 }
-
+\seealso{
+\code{\link{unsorted.grouped_df}}
+}

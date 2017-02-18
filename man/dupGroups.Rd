@@ -14,4 +14,3 @@ dupGroups(x, ...)
 \description{
 Calculates dupGroups.
 }
-

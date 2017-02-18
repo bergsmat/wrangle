@@ -17,4 +17,7 @@ grouped_df
 \description{
 Shows records with duplicate or duplicated values of grouping variables.
 }
-
+\examples{
+library(dplyr)
+dup(group_by(mtcars, mpg))
+}

@@ -17,4 +17,3 @@ data.frame
 \description{
 Drops columns in x that are entirely NA.
 }
-

@@ -14,4 +14,6 @@ weak(x, ...)
 \description{
 Shows na, duplicate, or duplicated elements.
 }
-
+\seealso{
+\code{\link{weak.grouped_df}}
+}

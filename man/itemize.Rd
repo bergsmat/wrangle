@@ -17,4 +17,6 @@ grouped_df
 \description{
 Shows unique combinations of items in specified columns.
 }
-
+\examples{
+itemize(mtcars, cyl, gear, carb)
+}

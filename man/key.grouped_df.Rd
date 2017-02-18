@@ -17,4 +17,3 @@ character
 \description{
 Fetches the key for a grouped_df as character vector
 }
-
