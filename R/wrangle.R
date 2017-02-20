@@ -47,7 +47,7 @@ detect <-  function(x,...)x %>%  ungroup %>%  transmute(...) %>%  group_by_all %
 
 #' Show unique combinations of items in specified columns
 #' 
-#' Shows unique combinations of items in specified columns.
+#' Shows unique combinations of items in specified columns (unquoted).
 #' @param x data.frame
 #' @param ... columns to show
 #' @export
@@ -59,7 +59,7 @@ itemize <-         function(x,...)x %>%  detect(...) %>%  unique
 
 #' Count unique combinations of items in specified columns.
 #' 
-#' Counts unique combinations of items in specified columns.
+#' Counts unique combinations of items in specified columns (unquoted).
 #' @param x data.frame
 #' @param ... columns to show
 #' @export
