@@ -15,7 +15,7 @@ enumerate(x, ...)
 grouped_df
 }
 \description{
-Counts unique combinations of items in specified columns.
+Counts unique combinations of items in specified columns (unquoted).
 }
 \examples{
 enumerate(mtcars, cyl, gear, carb)

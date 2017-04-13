@@ -15,7 +15,7 @@ itemize(x, ...)
 grouped_df
 }
 \description{
-Shows unique combinations of items in specified columns.
+Shows unique combinations of items in specified columns (unquoted).
 }
 \examples{
 itemize(mtcars, cyl, gear, carb)
