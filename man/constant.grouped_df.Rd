@@ -12,10 +12,11 @@
 \item{...}{grouping columns}
 }
 \value{
-data.frame
+grouped data.frame
 }
 \description{
-Returns columns of a grouped_df whose values do not vary within subsets defined by groups.
+Returns columns of a grouped_df whose values do not vary within subsets defined by groups. 
+If any grouping arguments (dots) are supplied, existing groups are over-ridden.
 }
 \seealso{
 Other constant: \code{\link{constant.data.frame}},

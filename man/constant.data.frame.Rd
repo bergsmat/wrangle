@@ -18,7 +18,12 @@ data.frame
 Returns columns of a data.frame whose values do not vary within subsets defined by columns named in \dots.
 }
 \examples{
+constant(Theoph)
 constant(Theoph, Subject) # Wt Dose
+Theoph$Study <- 1
+constant(Theoph)
+constant(Theoph, Study)
+constant(Theoph, Study, Subject)
 }
 \seealso{
 Other constant: \code{\link{constant.grouped_df}},
