@@ -21,3 +21,6 @@ Shows records with duplicate or duplicated values of grouping variables.
 library(dplyr)
 dup(group_by(mtcars, mpg))
 }
+\seealso{
+Other dup: \code{\link{dup}}
+}

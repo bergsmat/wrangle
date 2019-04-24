@@ -17,3 +17,7 @@ data.frame
 \description{
 Finds unique records for subset of columns with one unique value.
 }
+\seealso{
+Other util: \code{\link{detect}}, \code{\link{enumerate}},
+  \code{\link{itemize}}
+}

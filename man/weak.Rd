@@ -16,4 +16,6 @@ Shows na, duplicate, or duplicated elements.
 }
 \seealso{
 \code{\link{weak.grouped_df}}
+
+Other weak: \code{\link{weak.grouped_df}}
 }

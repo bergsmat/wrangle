@@ -21,4 +21,6 @@ head(informative(Theoph))
 }
 \seealso{
 \code{\link{informative.data.frame}}
+
+Other informative: \code{\link{informative.data.frame}}
 }

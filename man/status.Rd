@@ -18,3 +18,6 @@ Reports the status of an object.
 library(dplyr)
 status(group_by(Theoph, Subject, Time))
 }
+\seealso{
+Other status: \code{\link{status.grouped_df}}
+}

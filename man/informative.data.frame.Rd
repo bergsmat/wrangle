@@ -17,3 +17,6 @@ data.frame
 \description{
 Drops columns in x that are entirely NA.
 }
+\seealso{
+Other informative: \code{\link{informative}}
+}

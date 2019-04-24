@@ -14,3 +14,6 @@ key(x, ...)
 \description{
 Fetches the key of an object.
 }
+\seealso{
+Other key: \code{\link{key.grouped_df}}
+}

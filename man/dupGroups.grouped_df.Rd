@@ -17,3 +17,6 @@ grouped_df
 \description{
 Counts records with with duplicate or duplicated values of grouping variables. If b follows a and and is the same, then b is a duplicate, a is duplicated, and both are shown.
 }
+\seealso{
+Other dupGroups: \code{\link{dupGroups}}
+}

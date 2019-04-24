@@ -14,3 +14,6 @@ dupGroups(x, ...)
 \description{
 Calculates dupGroups.
 }
+\seealso{
+Other dupGroups: \code{\link{dupGroups.grouped_df}}
+}

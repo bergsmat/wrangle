@@ -31,4 +31,6 @@ status(group_by(Theoph, Subject, Time))
 \code{\link{itemize}}
 \code{\link{enumerate}}
 \code{\link{sort.grouped_df}}
+
+Other status: \code{\link{status}}
 }

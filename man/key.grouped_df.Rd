@@ -17,3 +17,6 @@ character
 \description{
 Fetches the key for a grouped_df as character vector
 }
+\seealso{
+Other key: \code{\link{key}}
+}

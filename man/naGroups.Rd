@@ -14,3 +14,6 @@ naGroups(x, ...)
 \description{
 Calculates naGroups.
 }
+\seealso{
+Other naGroups: \code{\link{naGroups.grouped_df}}
+}

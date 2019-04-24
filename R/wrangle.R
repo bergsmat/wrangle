@@ -10,6 +10,7 @@ globalVariables(c('static_','original_'))
 #' @importFrom tidyr spread
 #' @importFrom tidyr spread_
 #' @export
+#' @family sort
 #' @return grouped_df
 #' @examples
 #' library(dplyr)
@@ -26,6 +27,7 @@ sort.grouped_df <- function(x, decreasing = FALSE, ...) {
 #' @param x data.frame
 #' @param ... ignored
 #' @export
+#' @family group_by_all
 #' @return grouped_df
 # @describeIn wrangle
 
@@ -40,6 +42,7 @@ group_by_all <-   function(x,...)do.call(group_by,c(list(.data=x),lapply(names(x
 #' @param x data.frame
 #' @param ... columns to sort
 #' @export
+#' @family util
 #' @return grouped_df
 # @describeIn wrangle
 detect <-  function(x,...)x %>%  ungroup %>%  transmute(...) %>%  group_by_all %>%  sort
@@ -51,6 +54,7 @@ detect <-  function(x,...)x %>%  ungroup %>%  transmute(...) %>%  group_by_all %
 #' @param x data.frame
 #' @param ... columns to show
 #' @export
+#' @family util
 #' @return grouped_df
 #' @examples 
 #' itemize(mtcars, cyl, gear, carb)
@@ -63,6 +67,7 @@ itemize <-         function(x,...)x %>%  detect(...) %>%  unique
 #' @param x data.frame
 #' @param ... columns to show
 #' @export
+#' @family util
 #' @return grouped_df
 #' @examples
 #' enumerate(mtcars, cyl, gear, carb)
@@ -74,18 +79,25 @@ enumerate <-      function(x,...)x %>%  detect(...) %>%  summarise(count=n())
 #' Fetches the key of an object.
 #' @param x object of dispatch
 #' @param ... other arguments
+#' @family key
+#' @export
+#' 
 key <-            function(x,...)UseMethod('key')
 #' Calculate naGroups.
 #' 
 #' Calculates naGroups.
 #' @param x object of dispatch
 #' @param ... other arguments
+#' @export
+#' @family naGroups
 naGroups <-       function(x,...)UseMethod('naGroups')
 #' Calculate dupGroups.
 #' 
 #' Calculates dupGroups.
 #' @param x object of dispatch
 #' @param ... other arguments
+#' @export
+#' @family dupGroups
 dupGroups <-      function(x,...)UseMethod('dupGroups')
 #' Report status.
 #' 
@@ -93,6 +105,7 @@ dupGroups <-      function(x,...)UseMethod('dupGroups')
 #' @param x object of dispatch
 #' @param ... other arguments
 #' @export
+#' @family status
 #' @examples 
 #' library(dplyr)
 #' status(group_by(Theoph, Subject, Time))
@@ -104,6 +117,7 @@ status <-         function(x,...)UseMethod('status')
 #' @param ... other arguments
 #' @seealso \code{\link{unsorted.grouped_df}}
 #' @export
+#' @family unsorted
 unsorted <-       function(x,...)UseMethod('unsorted')
 
 #' Fetch the key for a grouped_df as character vector
@@ -112,6 +126,8 @@ unsorted <-       function(x,...)UseMethod('unsorted')
 #' @param x data.frame
 #' @param ... columns to show
 #' @return character
+#' @family key
+#' @export
 
 key.grouped_df <- function(x,...)sapply(groups(x),as.character)
 
@@ -121,6 +137,7 @@ key.grouped_df <- function(x,...)sapply(groups(x),as.character)
 #' @param x data.frame
 #' @param ... ignored
 #' @export
+#' @family unsorted
 #' @seealso \code{\link{na}} \code{\link{dup}}
 #' @return grouped_df
 # @describeIn wrangle
@@ -144,6 +161,7 @@ unsorted.grouped_df <- function(x,...){
 #' @param x data.frame
 #' @param ... ignored
 #' @export
+#' @family naGroups
 #' @return numeric
 
 naGroups.grouped_df <- function(x, ...){
@@ -165,6 +183,7 @@ naGroups.grouped_df <- function(x, ...){
 #' @param ... ignored
 #' @return grouped_df
 #' @export
+#' @family dupGroups
 dupGroups.grouped_df <- function(x, ...){
   key <- key(x)
   if (!all(key %in% names(x))) 
@@ -179,6 +198,7 @@ dupGroups.grouped_df <- function(x, ...){
 #' @param x data.frame
 #' @param ... ignored
 #' @export
+#' @family status
 #' @aliases wrangle
 #' @return returns x invisibly
 #' @examples 
@@ -212,6 +232,7 @@ status.grouped_df <- function (x, ...)
 #' @param ... other arguments
 #' @seealso \code{\link{na.grouped_df}} \code{\link{dup}} \code{\link{weak}} \code{\link{unsorted}}
 #' @export
+#' @family na
 na  <-             function(x, ...)UseMethod('na')
 #' Show duplicate or duplicated elements.
 #' 
@@ -220,6 +241,7 @@ na  <-             function(x, ...)UseMethod('na')
 #' @param ... other arguments
 #' @seealso \code{\link{dup.grouped_df}} \code{\link{na}} \code{\link{weak}}  \code{\link{unsorted}}
 #' @export
+#' @family dup
 dup <-             function(x,...)UseMethod('dup')
 #' Show na, duplicate, or duplicated elements.
 #' 
@@ -228,6 +250,7 @@ dup <-             function(x,...)UseMethod('dup')
 #' @param ... other arguments
 #' @seealso \code{\link{weak.grouped_df}}
 #' @export
+#' @family weak
 weak <-            function(x,...)UseMethod('weak')
 
 #' Show records with NA values of grouping variables.
@@ -236,6 +259,7 @@ weak <-            function(x,...)UseMethod('weak')
 #' @param x data.frame
 #' @param ... ignored
 #' @export
+#' @family na
 #' @return grouped_df
 # @describeIn wrangle
 
@@ -247,6 +271,7 @@ na.grouped_df <-   function(x,...)x[naGroups(x),]
 #' @param x data.frame
 #' @param ... ignored
 #' @export
+#' @family dup
 #' @return grouped_df
 #' @examples 
 #' library(dplyr)
@@ -261,6 +286,7 @@ dup.grouped_df <-  function(x,...)x[dupGroups(x),]
 #' @param x data.frame
 #' @param ... ignored
 #' @export
+#' @family weak
 #' @return grouped_df
 # @describeIn wrangle
 weak.grouped_df <- function(x,...)x[naGroups(x) | dupGroups(x),]
@@ -274,6 +300,7 @@ singular <- function(x,...)length(unique(x)) == 1
 #' @param x data.frame
 #' @param ... ignored
 #' @export
+#' @family util
 #' @return data.frame
 # @describeIn wrangle
 static <- function(x,...){
@@ -291,6 +318,7 @@ static <- function(x,...){
 #' @param y data.frame
 #' @param ... ingored
 #' @export
+#' @family ignore
 #' @return data.frame
 # @describeIn wrangle
 ignore <- function(x,y,...){
@@ -308,6 +336,7 @@ ignore <- function(x,y,...){
 #' Theoph$Dose <- NA
 #' head(informative(Theoph))
 #' @export
+#' @family informative
 # @describeIn wrangle
 informative <- function(x,...)UseMethod('informative')
 
@@ -317,6 +346,7 @@ informative <- function(x,...)UseMethod('informative')
 #' @param x data.frame
 #' @param ... ingored
 #' @export
+#' @family informative
 #' @return data.frame
 # @describeIn wrangle
 

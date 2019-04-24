@@ -17,3 +17,6 @@ grouped_df
 \description{
 Shows records with NA values of grouping variables.
 }
+\seealso{
+Other na: \code{\link{na}}
+}
