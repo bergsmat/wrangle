@@ -2,7 +2,6 @@ Package: wrangle
 Type: Package
 Title: A Systematic Data Wrangling Idiom
 Version: 0.5.2
-Date: 2019-01-22
 Author: Tim Bergsma
 Maintainer: Tim Bergsma <bergsmat@gmail.com>
 Description: Supports systematic scrutiny, modification, and integration of
