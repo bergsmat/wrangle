@@ -14,6 +14,8 @@ Description: Supports systematic scrutiny, modification, and integration of
     and informative() drops columns in x that are entirely NA; constant() returns
     values that are constant, given a key.  Data that have defined unique 
     combinations of grouping values behave more predictably during merge operations.
+URL: https://github.com/bergsmat/wrangle
+BugReports: https://github.com/bergsmat/wrangle/issues
 License: GPL-3
 LazyData: TRUE
 Imports:
