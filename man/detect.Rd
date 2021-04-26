@@ -18,6 +18,9 @@ grouped_df
 Sort column subsets.
 }
 \seealso{
-Other util: \code{\link{enumerate}}, \code{\link{itemize}},
-  \code{\link{static}}
+Other util: 
+\code{\link{enumerate}()},
+\code{\link{itemize}()},
+\code{\link{static}()}
 }
+\concept{util}

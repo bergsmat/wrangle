@@ -18,5 +18,7 @@ grouped_df
 Shows records with NA, duplicate or duplicated values of grouping variables.
 }
 \seealso{
-Other weak: \code{\link{weak}}
+Other weak: 
+\code{\link{weak}()}
 }
+\concept{weak}

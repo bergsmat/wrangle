@@ -17,3 +17,4 @@ grouped_df
 \description{
 Groups by all columns.
 }
+\concept{group_by_all}

@@ -15,5 +15,7 @@ dupGroups(x, ...)
 Calculates dupGroups.
 }
 \seealso{
-Other dupGroups: \code{\link{dupGroups.grouped_df}}
+Other dupGroups: 
+\code{\link{dupGroups.grouped_df}()}
 }
+\concept{dupGroups}

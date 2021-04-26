@@ -18,5 +18,7 @@ character
 Fetches the key for a grouped_df as character vector
 }
 \seealso{
-Other key: \code{\link{key}}
+Other key: 
+\code{\link{key}()}
 }
+\concept{key}

@@ -22,5 +22,7 @@ library(dplyr)
 dup(group_by(mtcars, mpg))
 }
 \seealso{
-Other dup: \code{\link{dup}}
+Other dup: 
+\code{\link{dup}()}
 }
+\concept{dup}

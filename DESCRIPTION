@@ -1,7 +1,7 @@
 Package: wrangle
 Type: Package
 Title: A Systematic Data Wrangling Idiom
-Version: 0.5.2
+Version: 0.5.5
 Author: Tim Bergsma
 Maintainer: Tim Bergsma <bergsmat@gmail.com>
 Description: Supports systematic scrutiny, modification, and integration of
@@ -19,7 +19,6 @@ LazyData: TRUE
 Imports:
     dplyr,
     tidyr,
-    lazyeval,
     magrittr,
     rlang
-RoxygenNote: 6.0.1
+RoxygenNote: 7.1.1

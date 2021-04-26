@@ -17,5 +17,7 @@ Shows na elements.
 \seealso{
 \code{\link{na.grouped_df}} \code{\link{dup}} \code{\link{weak}} \code{\link{unsorted}}
 
-Other na: \code{\link{na.grouped_df}}
+Other na: 
+\code{\link{na.grouped_df}()}
 }
+\concept{na}

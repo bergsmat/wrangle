@@ -21,6 +21,9 @@ Shows unique combinations of items in specified columns (unquoted).
 itemize(mtcars, cyl, gear, carb)
 }
 \seealso{
-Other util: \code{\link{detect}}, \code{\link{enumerate}},
-  \code{\link{static}}
+Other util: 
+\code{\link{detect}()},
+\code{\link{enumerate}()},
+\code{\link{static}()}
 }
+\concept{util}

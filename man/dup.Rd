@@ -17,5 +17,7 @@ Shows duplicate or duplicated elements.
 \seealso{
 \code{\link{dup.grouped_df}} \code{\link{na}} \code{\link{weak}}  \code{\link{unsorted}}
 
-Other dup: \code{\link{dup.grouped_df}}
+Other dup: 
+\code{\link{dup.grouped_df}()}
 }
+\concept{dup}

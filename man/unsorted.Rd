@@ -17,5 +17,7 @@ Shows unsorted elements.
 \seealso{
 \code{\link{unsorted.grouped_df}}
 
-Other unsorted: \code{\link{unsorted.grouped_df}}
+Other unsorted: 
+\code{\link{unsorted.grouped_df}()}
 }
+\concept{unsorted}

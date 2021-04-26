@@ -15,5 +15,7 @@ naGroups(x, ...)
 Calculates naGroups.
 }
 \seealso{
-Other naGroups: \code{\link{naGroups.grouped_df}}
+Other naGroups: 
+\code{\link{naGroups.grouped_df}()}
 }
+\concept{naGroups}

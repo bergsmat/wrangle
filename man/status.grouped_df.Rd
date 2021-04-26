@@ -32,5 +32,7 @@ status(group_by(Theoph, Subject, Time))
 \code{\link{enumerate}}
 \code{\link{sort.grouped_df}}
 
-Other status: \code{\link{status}}
+Other status: 
+\code{\link{status}()}
 }
+\concept{status}

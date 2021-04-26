@@ -18,5 +18,7 @@ data.frame
 Drops columns in x that are entirely NA.
 }
 \seealso{
-Other informative: \code{\link{informative}}
+Other informative: 
+\code{\link{informative}()}
 }
+\concept{informative}

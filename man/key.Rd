@@ -15,5 +15,7 @@ key(x, ...)
 Fetches the key of an object.
 }
 \seealso{
-Other key: \code{\link{key.grouped_df}}
+Other key: 
+\code{\link{key.grouped_df}()}
 }
+\concept{key}

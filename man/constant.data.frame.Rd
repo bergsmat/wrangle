@@ -26,6 +26,8 @@ constant(Theoph, Study)
 constant(Theoph, Study, Subject)
 }
 \seealso{
-Other constant: \code{\link{constant.grouped_df}},
-  \code{\link{constant}}
+Other constant: 
+\code{\link{constant.grouped_df}()},
+\code{\link{constant}()}
 }
+\concept{constant}

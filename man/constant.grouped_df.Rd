@@ -19,6 +19,8 @@ Returns columns of a grouped_df whose values do not vary within subsets defined 
 If any grouping arguments (dots) are supplied, existing groups are over-ridden.
 }
 \seealso{
-Other constant: \code{\link{constant.data.frame}},
-  \code{\link{constant}}
+Other constant: 
+\code{\link{constant.data.frame}()},
+\code{\link{constant}()}
 }
+\concept{constant}

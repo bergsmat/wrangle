@@ -15,6 +15,8 @@ constant(x, ...)
 Identifies constant features of an object.  Generic, with methods for data.frame and grouped_df.
 }
 \seealso{
-Other constant: \code{\link{constant.data.frame}},
-  \code{\link{constant.grouped_df}}
+Other constant: 
+\code{\link{constant.data.frame}()},
+\code{\link{constant.grouped_df}()}
 }
+\concept{constant}

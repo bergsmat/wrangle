@@ -21,6 +21,9 @@ Counts unique combinations of items in specified columns (unquoted).
 enumerate(mtcars, cyl, gear, carb)
 }
 \seealso{
-Other util: \code{\link{detect}}, \code{\link{itemize}},
-  \code{\link{static}}
+Other util: 
+\code{\link{detect}()},
+\code{\link{itemize}()},
+\code{\link{static}()}
 }
+\concept{util}

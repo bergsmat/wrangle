@@ -20,5 +20,7 @@ Finds records whose relative positons would change if sorted, i.e. records that 
 \seealso{
 \code{\link{na}} \code{\link{dup}}
 
-Other unsorted: \code{\link{unsorted}}
+Other unsorted: 
+\code{\link{unsorted}()}
 }
+\concept{unsorted}

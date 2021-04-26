@@ -23,3 +23,4 @@ As of 0.5, dplyr::arrange ignores groups. This function gives the old behavior a
 library(dplyr)
 head(sort(group_by(Theoph, Subject, Time)))
 }
+\concept{sort}

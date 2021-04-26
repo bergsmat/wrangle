@@ -8,7 +8,6 @@ globalVariables(c('static_','original_'))
 #' @param ... further sort criteria
 #' @import dplyr magrittr
 #' @importFrom tidyr spread
-#' @importFrom tidyr spread_
 #' @export
 #' @family sort
 #' @return grouped_df
@@ -18,7 +17,9 @@ globalVariables(c('static_','original_'))
 # @describeIn wrangle
 
 sort.grouped_df <- function(x, decreasing = FALSE, ...) {
-  dplyr::arrange_(x, .dots = c(groups(x), lazyeval::lazy_dots(...)))
+  x <- group_by(x, ..., .add = TRUE)
+  x <- dplyr::arrange(x, .by_group = TRUE )
+  x
 }
 
 #' Group by all columns.

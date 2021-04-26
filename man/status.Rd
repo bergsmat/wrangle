@@ -19,5 +19,7 @@ library(dplyr)
 status(group_by(Theoph, Subject, Time))
 }
 \seealso{
-Other status: \code{\link{status.grouped_df}}
+Other status: 
+\code{\link{status.grouped_df}()}
 }
+\concept{status}
