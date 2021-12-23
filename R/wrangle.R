@@ -22,19 +22,19 @@ sort.grouped_df <- function(x, decreasing = FALSE, ...) {
   x
 }
 
-#' Group by all columns.
-#'
-#' Groups by all columns.
-#' @param x data.frame
-#' @param ... ignored
-#' @export
-#' @family group_by_all
-#' @return grouped_df
+# Group by all columns.
+#
+# Groups by all columns.
+# @param x data.frame
+# @param ... ignored
+# @export
+# @family group_by_all
+# @return grouped_df
 # @describeIn wrangle
 
-#'
+#
 #group_by_all <-   function(x,...)x %>%  group_by_(.dots=as.list(names(x)))
-group_by_all <-   function(x,...)do.call(group_by,c(list(.data=x),lapply(names(x),as.symbol)))
+#group_by_all <-   function(x,...)do.call(group_by,c(list(.data=x),lapply(names(x),as.symbol)))
 
 
 #' Sort column subsets.
@@ -46,7 +46,7 @@ group_by_all <-   function(x,...)do.call(group_by,c(list(.data=x),lapply(names(x
 #' @family util
 #' @return grouped_df
 # @describeIn wrangle
-detect <-  function(x,...)x %>%  ungroup %>%  transmute(...) %>%  group_by_all %>%  sort
+detect <-  function(x,...)x %>%  ungroup %>%  transmute(...) %>%  group_by(across()) %>%  sort
 
 
 #' Show unique combinations of items in specified columns
