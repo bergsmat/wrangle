@@ -1,6 +1,8 @@
 #' Join Data Safely
 #'
 #' Joins data safely.  Generic, with method for data.frame.
+#' @aliases NULL safe_join_generic
+#' @keywords internal
 #' @param x object of dispatch
 #' @param ... arguments to methods
 #' @seealso \code{\link{safe_join.data.frame}}
@@ -18,6 +20,7 @@ safe_join <- function(x, ...)UseMethod('safe_join')
 #' rows with additional columns and are expecting
 #' singular matches. Gives an error if row order
 #' or number would have been altered by a left join.
+#' @aliases safe_join
 #' @param x data.frame
 #' @param y data.frame
 #' @param ... passed to dplyr::left_join

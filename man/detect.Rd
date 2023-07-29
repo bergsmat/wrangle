@@ -24,3 +24,4 @@ Other util:
 \code{\link{static}()}
 }
 \concept{util}
+\keyword{internal}
