@@ -10,16 +10,18 @@
 \arguments{
 \item{x}{data.frame}
 
-\item{...}{ignored}
+\item{...}{optional grouping columns (named arguments are ignored)}
 }
 \value{
-returns x invisibly
+returns x invisibly (as originally grouped)
 }
 \description{
 Reports status with respect to grouping variables.
 }
 \examples{
 library(dplyr)
+status(Theoph)
+status(Theoph, Subject)
 status(group_by(Theoph, Subject, Time))
 }
 \seealso{

@@ -3,20 +3,20 @@
 \name{naGroups.data.frame}
 \alias{naGroups.data.frame}
 \alias{naGroups}
-\title{Count records with NA values of grouping variables.}
+\title{Index records with NA values of grouping variables.}
 \usage{
 \method{naGroups}{data.frame}(x, ...)
 }
 \arguments{
 \item{x}{data.frame}
 
-\item{...}{ignored}
+\item{...}{optional grouping columns (named arguments are ignored)}
 }
 \value{
 logical
 }
 \description{
-Counts records with NA values of grouping variables.
+Indexes records with NA values of grouping variables.
 }
 \seealso{
 Other naGroups: 

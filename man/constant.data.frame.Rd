@@ -10,7 +10,7 @@
 \arguments{
 \item{x}{object}
 
-\item{...}{grouping columns}
+\item{...}{optional grouping columns (named arguments are ignored)}
 }
 \value{
 data.frame (should be same class as x)

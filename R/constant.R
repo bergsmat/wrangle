@@ -21,7 +21,7 @@ constant <- function(x,...)UseMethod('constant')
 #' @aliases constant
 #' @family constant
 #' @param x object
-#' @param ... grouping columns
+#' @param ... optional grouping columns (named arguments are ignored)
 #' @return data.frame (should be same class as x)
 #' @import dplyr
 #' @importFrom tidyr gather

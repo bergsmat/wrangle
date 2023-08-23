@@ -3,25 +3,27 @@
 \name{unsorted.data.frame}
 \alias{unsorted.data.frame}
 \alias{unsorted}
-\title{Find records whose relative positions would change if sorted.}
+\title{Extract records whose relative positions would change if sorted.}
 \usage{
 \method{unsorted}{data.frame}(x, ...)
 }
 \arguments{
 \item{x}{data.frame}
 
-\item{...}{ignored}
+\item{...}{optional grouping columns (named arguments are ignored)}
 }
 \value{
-data.frame
+data.frame, possibly grouped_df
 }
 \description{
-Finds records whose relative positions would change if sorted, i.e. records that would not have the same nearest neighbors (before and after).
+Extracts records whose relative positions would change if sorted, i.e. records that would not have the same nearest neighbors (before and after). misplaced() returns the index that extracts these records.
 }
 \seealso{
 \code{\link{na}} \code{\link{dup}}
 
 Other unsorted: 
+\code{\link{misplaced.data.frame}()},
+\code{\link{misplaced_generic}},
 \code{\link{unsorted_generic}}
 }
 \concept{unsorted}

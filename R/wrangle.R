@@ -49,7 +49,7 @@ detect <-  function(x,...) x %>%
 #' @return grouped_df
 #' @examples 
 #' itemize(mtcars, cyl, gear, carb)
-itemize <-         function(x,...)x %>%  detect(...) %>%  unique
+itemize <- function(x,...)x %>%  detect(...) %>%  unique
 
 #' Count unique combinations of items in specified columns.
 #' 
@@ -61,7 +61,7 @@ itemize <-         function(x,...)x %>%  detect(...) %>%  unique
 #' @return grouped_df
 #' @examples
 #' enumerate(mtcars, cyl, gear, carb)
-enumerate <-      function(x,...)x %>%  detect(...) %>%  summarise(count=n())
+enumerate <- function(x,...)x %>%  detect(...) %>%  summarise(count=n())
 
 # #' Fetch the key.
 # #' 
@@ -84,7 +84,7 @@ enumerate <-      function(x,...)x %>%  detect(...) %>%  summarise(count=n())
 #' @family naGroups
 #' @aliases NULL naGroups_generic
 #' @keywords internal
-naGroups <-       function(x,...)UseMethod('naGroups')
+naGroups <- function(x,...)UseMethod('naGroups')
 #' Calculate dupGroups.
 #' 
 #' Calculates dupGroups.
@@ -94,7 +94,7 @@ naGroups <-       function(x,...)UseMethod('naGroups')
 #' @family dupGroups
 #' @aliases NULL dupGroups_generic
 #' @keywords internal
-dupGroups <-      function(x,...)UseMethod('dupGroups')
+dupGroups <- function(x,...)UseMethod('dupGroups')
 #' Report status.
 #' 
 #' Reports the status of an object.
@@ -107,7 +107,7 @@ dupGroups <-      function(x,...)UseMethod('dupGroups')
 #' @examples 
 #' library(dplyr)
 #' status(group_by(Theoph, Subject, Time))
-status <-         function(x,...)UseMethod('status')
+status <- function(x,...)UseMethod('status')
 #' Show unsorted elements.
 #' 
 #' Shows unsorted elements.
@@ -118,84 +118,118 @@ status <-         function(x,...)UseMethod('status')
 #' @family unsorted
 #' @aliases NULL unsorted_generic
 #' @keywords internal
-unsorted <-       function(x,...)UseMethod('unsorted')
+unsorted <- function(x,...)UseMethod('unsorted')
 
-# #' Fetch the key for a grouped_df as character vector
-# #' 
-# #' Fetches the key for a grouped_df as character vector
-# #' @param x data.frame
-# #' @param ... columns to show
-# #' @return character
-# #' @family key
-# #' @importFrom dplyr group_vars
-# #' @export
-# key.data.frame <- function(x,...)group_vars(x)
-
-#' Find records whose relative positions would change if sorted.
+#' Show misplaced elements.
 #' 
-#' Finds records whose relative positions would change if sorted, i.e. records that would not have the same nearest neighbors (before and after).
+#' Shows misplaced elements.
+#' @param x object of dispatch
+#' @param ... other arguments
+#' @export
+#' @family unsorted
+#' @aliases NULL misplaced_generic
+#' @keywords internal
+misplaced <- function(x,...)UseMethod('misplaced')
+
+#' Index records whose relative positions would change if sorted.
+#' 
+#' Indexes records whose relative positions would change if sorted, i.e. records that would not have the same nearest neighbors (before and after).  unsorted() returns the records corresponding to this index.
 #' @param x data.frame
-#' @param ... ignored
+#' @param ... optional grouping columns (named arguments are ignored)
+#' @export
+#' @family unsorted
+#' @aliases misplaced
+#' @seealso \code{\link{na}} \code{\link{dup}}
+#' @return logical with length nrow(x)
+#' @importFrom dplyr arrange
+
+misplaced.data.frame <- function(x,...){
+  args <- quos(...)
+  args <- lapply(args,f_rhs)
+  vars <- args[names(args) == '']
+  vars <- sapply(vars, as.character)
+  if(!length(vars)) vars <- character(0) # else was named list
+  stopifnot(all(vars %in% names(x)))
+  if(length(vars)) x %<>% group_by(across(all_of(vars)))
+  
+  x$original_ <- as.double(seq_len(nrow(x)))
+  x$leads_ <- lead(x$original_, default = Inf)
+  x$lags_ <- lag(x$original_, default = -Inf)
+  
+  x %<>% arrange(.by_group = TRUE) # does nothing if no groups present
+  x$now_leads_ <- lead(x$original_, default = Inf)
+  x$now_lags_ <- lag(x$original_, default = -Inf)
+  x$static_ <- with(x, leads_ == now_leads_ & lags_ == now_lags_)
+  x %<>% arrange(original_)
+  return(!x$static_)
+}
+
+#' Extract records whose relative positions would change if sorted.
+#' 
+#' Extracts records whose relative positions would change if sorted, i.e. records that would not have the same nearest neighbors (before and after). misplaced() returns the index that extracts these records.
+#' @param x data.frame
+#' @param ... optional grouping columns (named arguments are ignored)
 #' @export
 #' @family unsorted
 #' @aliases unsorted
 #' @seealso \code{\link{na}} \code{\link{dup}}
-#' @return data.frame
+#' @return data.frame, possibly grouped_df
 #' @importFrom dplyr arrange
 
+unsorted.data.frame <- function(x,...)x[misplaced(x, ...), , drop = FALSE]
 
-unsorted.data.frame <- function(x,...){
-  x$original_ <- as.double(seq_len(nrow(x)))
-  x$leads_ <- lead(x$original_, default = Inf)
-  x$lags_ <- lag(x$original_, default = -Inf)
-  x %<>% sort
-  x$now_leads_ <- lead(x$original_, default = Inf)
-  x$now_lags_ <- lag(x$original_, default = -Inf)
-  x$static_ <- with(x, leads_ == now_leads_ & lags_ == now_lags_)
-  x %<>% filter(static_==FALSE) 
-  #x <- x[order(x$original_),]
-  x %<>% arrange(original_)
-  x %<>% select(-(original_:static_))
-  x
-}
 
-#' Count records with NA values of grouping variables.
+#' Index records with NA values of grouping variables.
 #' 
-#' Counts records with NA values of grouping variables.
+#' Indexes records with NA values of grouping variables.
 #' @param x data.frame
-#' @param ... ignored
+#' @param ... optional grouping columns (named arguments are ignored)
 #' @export
 #' @aliases naGroups
 #' @family naGroups
 #' @return logical
 
 naGroups.data.frame <- function(x, ...){
+  args <- quos(...)
+  args <- lapply(args,f_rhs)
+  vars <- args[names(args) == '']
+  vars <- sapply(vars, as.character)
+  if(!length(vars)) vars <- character(0) # else was named list
+  stopifnot(all(vars %in% names(x)))
+  if(length(vars)) x %<>% group_by(across(all_of(vars)))
+  
   key <- group_vars(x)
   if (!all(key %in% names(x))) 
     stop("nonexistent groups(s)")
   if (nrow(x) == 0) 
     return(logical(0))
+  if(!length(key)){ # i.e. no groups, therefore no NA groups
+    return(rep(FALSE, nrow(x)))
+  }
   y <- sapply(key, function(k) is.na(x[[k]]))
   if (nrow(x) == 1) 
     dim(y) <- c(1, length(y))
   as.logical(apply(y, 1, sum))
 }
 
-#' Count records with with duplicate or duplicated values of grouping variables.
+#' Index records with with duplicate or duplicated values of grouping variables.
 #' 
-#' Counts records with with duplicate or duplicated values of grouping variables. If b follows a and and is the same, then b is a duplicate, a is duplicated, and both are shown.
+#' Indexes records with with duplicate or duplicated values of grouping variables. If b follows a and and is the same, then b is a duplicate, a is duplicated, and both are shown.
 #' @param x data.frame
-#' @param ... ignored
+#' @param ... optional grouping columns (named arguments are ignored)
 #' @return grouped_df
 #' @export
 #' @aliases dupGroups
 #' @family dupGroups
 #' @return logical
 dupGroups.data.frame <- function(x, ...){
-  # key <- key(x)
-  # if (!all(key %in% names(x))) 
-  #   stop("nonexistent groups(s)")
-  # y <- x[, key, drop = FALSE]
+  args <- quos(...)
+  args <- lapply(args,f_rhs)
+  vars <- args[names(args) == '']
+  vars <- sapply(vars, as.character)
+  if(!length(vars)) vars <- character(0) # else was named list
+  stopifnot(all(vars %in% names(x)))
+  if(length(vars)) x %<>% group_by(across(all_of(vars)))
   
   # if there are no groups, then none are duplicated
   if(!length(group_vars(x))) return(rep(FALSE, nrow(x)))
@@ -211,13 +245,15 @@ dupGroups.data.frame <- function(x, ...){
 #' 
 #' Reports status with respect to grouping variables.
 #' @param x data.frame
-#' @param ... ignored
+#' @param ... optional grouping columns (named arguments are ignored)
 #' @export
 #' @family status
 #' @aliases status
-#' @return returns x invisibly
+#' @return returns x invisibly (as originally grouped)
 #' @examples 
 #' library(dplyr)
+#' status(Theoph)
+#' status(Theoph, Subject)
 #' status(group_by(Theoph, Subject, Time))
 #' @seealso 
 #' \code{\link{na}} 
@@ -231,13 +267,23 @@ dupGroups.data.frame <- function(x, ...){
 
 status.data.frame <- function (x, ...) 
 {
+  o <- x
+  # determine the legitimate un-named arguments
+  args <- quos(...)
+  args <- lapply(args,f_rhs)
+  vars <- args[names(args) == '']
+  vars <- sapply(vars, as.character)
+  if(!length(vars)) vars <- character(0) # else was named list
+  stopifnot(all(vars %in% names(x)))
+  if(length(vars)) x %<>% group_by(across(all_of(vars)))
+  
   cat("Source: local data frame ", dplyr::dim_desc(x), "\n", sep = "")
   cat("Groups: ",                  group_vars(x), "\n", sep = " ")
   cat("NAs: ",                     sum(naGroups(x)), "\n", sep = "")
   cat("duplicates: ",              sum(dupGroups(x)), "\n", sep = "")
-  cat("unsorted: ",                nrow(unsorted(x)), "\n", sep = "")
+  cat("unsorted: ",                sum(misplaced(x)), "\n", sep = "")
   cat("\n")
-  invisible(x)
+  invisible(o)
 }
 
 #' Show na elements.
@@ -250,7 +296,7 @@ status.data.frame <- function (x, ...)
 #' @aliases NULL na_generic
 #' @keywords internal
 #' @family na
-na  <-             function(x, ...)UseMethod('na')
+na  <- function(x, ...)UseMethod('na')
 #' Show duplicate or duplicated elements.
 #' 
 #' Shows duplicate or duplicated elements.
@@ -261,7 +307,7 @@ na  <-             function(x, ...)UseMethod('na')
 #' @aliases NULL dup_generic
 #' @keywords internal
 #' @family dup
-dup <-             function(x,...)UseMethod('dup')
+dup <- function(x,...)UseMethod('dup')
 #' Show na, duplicate, or duplicated elements.
 #' 
 #' Shows na, duplicate, or duplicated elements.
@@ -272,26 +318,25 @@ dup <-             function(x,...)UseMethod('dup')
 #' @aliases NULL weak_generic
 #' @keywords internal
 #' @family weak
-weak <-            function(x,...)UseMethod('weak')
+weak <- function(x,...)UseMethod('weak')
 
 #' Show records with NA values of grouping variables.
 #' 
 #' Shows records with NA values of grouping variables.
 #' @param x data.frame
-#' @param ... ignored
+#' @param ... optional grouping columns (named arguments are ignored)
 #' @export
 #' @family na
 #' @aliases na
 #' @return data.frame
 
-
-na.data.frame <-   function(x,...)x[naGroups(x),]
+na.data.frame <- function(x,...)x[naGroups(x, ...), , drop = FALSE]
 
 #' Show records with duplicate or duplicated values of grouping variables.
 #' 
 #' Shows records with duplicate or duplicated values of grouping variables.
 #' @param x data.frame
-#' @param ... ignored
+#' @param ... optional grouping columns (named arguments are ignored)
 #' @export
 #' @family dup
 #' @return data.frame
@@ -301,19 +346,19 @@ na.data.frame <-   function(x,...)x[naGroups(x),]
 #' dupGroups(mtcars)
 #' dupGroups(group_by(mtcars, mpg))
 #' dup(group_by(mtcars, mpg))
-dup.data.frame <-  function(x,...) x[dupGroups(x),]
+dup.data.frame <- function(x, ...) x[dupGroups(x, ...), , drop = FALSE]
 
 
 #' Show records with NA, duplicate or duplicated values of grouping variables.
 #' 
 #' Shows records with NA, duplicate or duplicated values of grouping variables.
 #' @param x data.frame
-#' @param ... ignored
+#' @param ... optional grouping columns (named arguments are ignored)
 #' @export
 #' @aliases weak
 #' @family weak
 #' @return data.frame
-weak.data.frame <- function(x,...)x[naGroups(x) | dupGroups(x),]
+weak.data.frame <- function(x,...)x[naGroups(x, ...) | dupGroups(x, ...), , drop = FALSE]
 
 
 singular <- function(x,...)length(unique(x)) == 1
@@ -345,7 +390,7 @@ static <- function(x,...){
 #' @return data.frame
 
 ignore <- function(x,y,...){
-  x[,! names(x) %in% names(y),drop=FALSE]
+  x[,! names(x) %in% names(y), drop=FALSE]
 }
 
 #' Drop columns in x that are entirely NA.

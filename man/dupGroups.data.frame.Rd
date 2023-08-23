@@ -3,14 +3,14 @@
 \name{dupGroups.data.frame}
 \alias{dupGroups.data.frame}
 \alias{dupGroups}
-\title{Count records with with duplicate or duplicated values of grouping variables.}
+\title{Index records with with duplicate or duplicated values of grouping variables.}
 \usage{
 \method{dupGroups}{data.frame}(x, ...)
 }
 \arguments{
 \item{x}{data.frame}
 
-\item{...}{ignored}
+\item{...}{optional grouping columns (named arguments are ignored)}
 }
 \value{
 grouped_df
@@ -18,7 +18,7 @@ grouped_df
 logical
 }
 \description{
-Counts records with with duplicate or duplicated values of grouping variables. If b follows a and and is the same, then b is a duplicate, a is duplicated, and both are shown.
+Indexes records with with duplicate or duplicated values of grouping variables. If b follows a and and is the same, then b is a duplicate, a is duplicated, and both are shown.
 }
 \seealso{
 Other dupGroups: 

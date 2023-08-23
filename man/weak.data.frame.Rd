@@ -10,7 +10,7 @@
 \arguments{
 \item{x}{data.frame}
 
-\item{...}{ignored}
+\item{...}{optional grouping columns (named arguments are ignored)}
 }
 \value{
 data.frame
