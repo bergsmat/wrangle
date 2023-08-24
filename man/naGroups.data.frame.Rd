@@ -2,7 +2,6 @@
 % Please edit documentation in R/wrangle.R
 \name{naGroups.data.frame}
 \alias{naGroups.data.frame}
-\alias{naGroups}
 \title{Index records with NA values of grouping variables.}
 \usage{
 \method{naGroups}{data.frame}(x, ...)
@@ -20,6 +19,6 @@ Indexes records with NA values of grouping variables.
 }
 \seealso{
 Other naGroups: 
-\code{\link{naGroups_generic}}
+\code{\link{naGroups}()}
 }
 \concept{naGroups}

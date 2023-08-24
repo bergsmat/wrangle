@@ -2,7 +2,6 @@
 % Please edit documentation in R/wrangle.R
 \name{na.data.frame}
 \alias{na.data.frame}
-\alias{na}
 \title{Show records with NA values of grouping variables.}
 \usage{
 \method{na}{data.frame}(x, ...)
@@ -20,6 +19,6 @@ Shows records with NA values of grouping variables.
 }
 \seealso{
 Other na: 
-\code{\link{na_generic}}
+\code{\link{na}()}
 }
 \concept{na}

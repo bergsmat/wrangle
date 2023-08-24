@@ -3,7 +3,6 @@
 #' Identifies constant features of an object.  Generic, with methods for data.frame and grouped_df.
 #' 
 #' @export
-#' @aliases NULL constant_generic
 #' @keywords internal
 #' @family constant
 #' @param x object
@@ -18,7 +17,6 @@ constant <- function(x,...)UseMethod('constant')
 #' 
 #' 
 #' @export
-#' @aliases constant
 #' @family constant
 #' @param x object
 #' @param ... optional grouping columns (named arguments are ignored)

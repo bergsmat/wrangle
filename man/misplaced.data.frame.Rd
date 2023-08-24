@@ -2,7 +2,6 @@
 % Please edit documentation in R/wrangle.R
 \name{misplaced.data.frame}
 \alias{misplaced.data.frame}
-\alias{misplaced}
 \title{Index records whose relative positions would change if sorted.}
 \usage{
 \method{misplaced}{data.frame}(x, ...)
@@ -22,8 +21,8 @@ Indexes records whose relative positions would change if sorted, i.e. records th
 \code{\link{na}} \code{\link{dup}}
 
 Other unsorted: 
-\code{\link{misplaced_generic}},
+\code{\link{misplaced}()},
 \code{\link{unsorted.data.frame}()},
-\code{\link{unsorted_generic}}
+\code{\link{unsorted}()}
 }
 \concept{unsorted}

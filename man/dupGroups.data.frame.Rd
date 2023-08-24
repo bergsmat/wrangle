@@ -2,7 +2,6 @@
 % Please edit documentation in R/wrangle.R
 \name{dupGroups.data.frame}
 \alias{dupGroups.data.frame}
-\alias{dupGroups}
 \title{Index records with with duplicate or duplicated values of grouping variables.}
 \usage{
 \method{dupGroups}{data.frame}(x, ...)
@@ -22,6 +21,6 @@ Indexes records with with duplicate or duplicated values of grouping variables. 
 }
 \seealso{
 Other dupGroups: 
-\code{\link{dupGroups_generic}}
+\code{\link{dupGroups}()}
 }
 \concept{dupGroups}

@@ -2,7 +2,6 @@
 % Please edit documentation in R/wrangle.R
 \name{unsorted.data.frame}
 \alias{unsorted.data.frame}
-\alias{unsorted}
 \title{Extract records whose relative positions would change if sorted.}
 \usage{
 \method{unsorted}{data.frame}(x, ...)
@@ -23,7 +22,7 @@ Extracts records whose relative positions would change if sorted, i.e. records t
 
 Other unsorted: 
 \code{\link{misplaced.data.frame}()},
-\code{\link{misplaced_generic}},
-\code{\link{unsorted_generic}}
+\code{\link{misplaced}()},
+\code{\link{unsorted}()}
 }
 \concept{unsorted}

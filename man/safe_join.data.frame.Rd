@@ -2,7 +2,6 @@
 % Please edit documentation in R/safejoin.R
 \name{safe_join.data.frame}
 \alias{safe_join.data.frame}
-\alias{safe_join}
 \title{Join Data Frames Safely}
 \usage{
 \method{safe_join}{data.frame}(x, y, ...)
@@ -33,6 +32,6 @@ x \%>\% safe_join(rbind(y,y))
 }
 \seealso{
 Other safe_join: 
-\code{\link{safe_join_generic}}
+\code{\link{safe_join}()}
 }
 \concept{safe_join}

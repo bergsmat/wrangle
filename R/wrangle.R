@@ -69,7 +69,6 @@ enumerate <- function(x,...)x %>%  detect(...) %>%  summarise(count=n())
 # #' @param x object of dispatch
 # #' @param ... other arguments
 # #' @family key
-# #' @aliases NULL key_generic
 # #' @keywords internal
 # #' @export
 # #' 
@@ -82,7 +81,6 @@ enumerate <- function(x,...)x %>%  detect(...) %>%  summarise(count=n())
 #' @param ... other arguments
 #' @export
 #' @family naGroups
-#' @aliases NULL naGroups_generic
 #' @keywords internal
 naGroups <- function(x,...)UseMethod('naGroups')
 #' Calculate dupGroups.
@@ -92,7 +90,6 @@ naGroups <- function(x,...)UseMethod('naGroups')
 #' @param ... other arguments
 #' @export
 #' @family dupGroups
-#' @aliases NULL dupGroups_generic
 #' @keywords internal
 dupGroups <- function(x,...)UseMethod('dupGroups')
 #' Report status.
@@ -102,7 +99,6 @@ dupGroups <- function(x,...)UseMethod('dupGroups')
 #' @param ... other arguments
 #' @export
 #' @family status
-#' @aliases NULL status_generic
 #' @keywords internal
 #' @examples 
 #' library(dplyr)
@@ -116,7 +112,6 @@ status <- function(x,...)UseMethod('status')
 #' @seealso \code{\link{unsorted.data.frame}}
 #' @export
 #' @family unsorted
-#' @aliases NULL unsorted_generic
 #' @keywords internal
 unsorted <- function(x,...)UseMethod('unsorted')
 
@@ -127,7 +122,6 @@ unsorted <- function(x,...)UseMethod('unsorted')
 #' @param ... other arguments
 #' @export
 #' @family unsorted
-#' @aliases NULL misplaced_generic
 #' @keywords internal
 misplaced <- function(x,...)UseMethod('misplaced')
 
@@ -138,7 +132,6 @@ misplaced <- function(x,...)UseMethod('misplaced')
 #' @param ... optional grouping columns (named arguments are ignored)
 #' @export
 #' @family unsorted
-#' @aliases misplaced
 #' @seealso \code{\link{na}} \code{\link{dup}}
 #' @return logical with length nrow(x)
 #' @importFrom dplyr arrange
@@ -171,7 +164,6 @@ misplaced.data.frame <- function(x,...){
 #' @param ... optional grouping columns (named arguments are ignored)
 #' @export
 #' @family unsorted
-#' @aliases unsorted
 #' @seealso \code{\link{na}} \code{\link{dup}}
 #' @return data.frame, possibly grouped_df
 #' @importFrom dplyr arrange
@@ -185,7 +177,6 @@ unsorted.data.frame <- function(x,...)x[misplaced(x, ...), , drop = FALSE]
 #' @param x data.frame
 #' @param ... optional grouping columns (named arguments are ignored)
 #' @export
-#' @aliases naGroups
 #' @family naGroups
 #' @return logical
 
@@ -219,7 +210,6 @@ naGroups.data.frame <- function(x, ...){
 #' @param ... optional grouping columns (named arguments are ignored)
 #' @return grouped_df
 #' @export
-#' @aliases dupGroups
 #' @family dupGroups
 #' @return logical
 dupGroups.data.frame <- function(x, ...){
@@ -248,7 +238,6 @@ dupGroups.data.frame <- function(x, ...){
 #' @param ... optional grouping columns (named arguments are ignored)
 #' @export
 #' @family status
-#' @aliases status
 #' @return returns x invisibly (as originally grouped)
 #' @examples 
 #' library(dplyr)
@@ -293,7 +282,6 @@ status.data.frame <- function (x, ...)
 #' @param ... other arguments
 #' @seealso \code{\link{na.data.frame}} \code{\link{dup}} \code{\link{weak}} \code{\link{unsorted}}
 #' @export
-#' @aliases NULL na_generic
 #' @keywords internal
 #' @family na
 na  <- function(x, ...)UseMethod('na')
@@ -304,7 +292,6 @@ na  <- function(x, ...)UseMethod('na')
 #' @param ... other arguments
 #' @seealso \code{\link{dup.data.frame}} \code{\link{na}} \code{\link{weak}}  \code{\link{unsorted}}
 #' @export
-#' @aliases NULL dup_generic
 #' @keywords internal
 #' @family dup
 dup <- function(x,...)UseMethod('dup')
@@ -315,7 +302,6 @@ dup <- function(x,...)UseMethod('dup')
 #' @param ... other arguments
 #' @seealso \code{\link{weak.data.frame}}
 #' @export
-#' @aliases NULL weak_generic
 #' @keywords internal
 #' @family weak
 weak <- function(x,...)UseMethod('weak')
@@ -327,7 +313,6 @@ weak <- function(x,...)UseMethod('weak')
 #' @param ... optional grouping columns (named arguments are ignored)
 #' @export
 #' @family na
-#' @aliases na
 #' @return data.frame
 
 na.data.frame <- function(x,...)x[naGroups(x, ...), , drop = FALSE]
@@ -340,7 +325,6 @@ na.data.frame <- function(x,...)x[naGroups(x, ...), , drop = FALSE]
 #' @export
 #' @family dup
 #' @return data.frame
-#' @aliases dup
 #' @examples 
 #' library(dplyr)
 #' dupGroups(mtcars)
@@ -355,7 +339,6 @@ dup.data.frame <- function(x, ...) x[dupGroups(x, ...), , drop = FALSE]
 #' @param x data.frame
 #' @param ... optional grouping columns (named arguments are ignored)
 #' @export
-#' @aliases weak
 #' @family weak
 #' @return data.frame
 weak.data.frame <- function(x,...)x[naGroups(x, ...) | dupGroups(x, ...), , drop = FALSE]

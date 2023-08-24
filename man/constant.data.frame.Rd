@@ -2,7 +2,6 @@
 % Please edit documentation in R/constant.R
 \name{constant.data.frame}
 \alias{constant.data.frame}
-\alias{constant}
 \title{Identify Constant Features of a Data Frame}
 \usage{
 \method{constant}{data.frame}(x, ...)
@@ -34,6 +33,6 @@ constant(Theoph, Study)               # Study
 }
 \seealso{
 Other constant: 
-\code{\link{constant_generic}}
+\code{\link{constant}()}
 }
 \concept{constant}

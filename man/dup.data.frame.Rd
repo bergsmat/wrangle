@@ -2,7 +2,6 @@
 % Please edit documentation in R/wrangle.R
 \name{dup.data.frame}
 \alias{dup.data.frame}
-\alias{dup}
 \title{Show records with duplicate or duplicated values of grouping variables.}
 \usage{
 \method{dup}{data.frame}(x, ...)
@@ -26,6 +25,6 @@ dup(group_by(mtcars, mpg))
 }
 \seealso{
 Other dup: 
-\code{\link{dup_generic}}
+\code{\link{dup}()}
 }
 \concept{dup}

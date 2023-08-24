@@ -2,7 +2,6 @@
 % Please edit documentation in R/wrangle.R
 \name{weak.data.frame}
 \alias{weak.data.frame}
-\alias{weak}
 \title{Show records with NA, duplicate or duplicated values of grouping variables.}
 \usage{
 \method{weak}{data.frame}(x, ...)
@@ -20,6 +19,6 @@ Shows records with NA, duplicate or duplicated values of grouping variables.
 }
 \seealso{
 Other weak: 
-\code{\link{weak_generic}}
+\code{\link{weak}()}
 }
 \concept{weak}

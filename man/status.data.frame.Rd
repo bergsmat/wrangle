@@ -2,7 +2,6 @@
 % Please edit documentation in R/wrangle.R
 \name{status.data.frame}
 \alias{status.data.frame}
-\alias{status}
 \title{Report status with respect to grouping variables.}
 \usage{
 \method{status}{data.frame}(x, ...)
@@ -35,6 +34,6 @@ status(group_by(Theoph, Subject, Time))
 \code{\link{sort.grouped_df}}
 
 Other status: 
-\code{\link{status_generic}}
+\code{\link{status}()}
 }
 \concept{status}
