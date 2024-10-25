@@ -30,6 +30,10 @@ constant(Theoph, Study, Subject)      # Subject Wt Dose Study
 Theoph <- group_by(Theoph, Subject)
 constant(Theoph)                      # Subject Wt Dose Study
 constant(Theoph, Study)               # Study
+foo <- data.frame(x = 1)
+foo <-  group_by(foo, x)
+class(foo) <- c('foo', class(foo))
+stopifnot(identical(class(foo), class(constant(foo))))
 }
 \seealso{
 Other constant: 

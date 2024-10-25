@@ -12,7 +12,7 @@ constant(x, ...)
 \item{...}{passed arguments}
 }
 \description{
-Identifies constant features of an object.  Generic, with methods for data.frame and grouped_df.
+Identifies constant features of an object.  Generic, with method for data.frame.
 }
 \seealso{
 Other constant: 

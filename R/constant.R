@@ -1,6 +1,6 @@
 #' Identify Constant Features of an Object
 #' 
-#' Identifies constant features of an object.  Generic, with methods for data.frame and grouped_df.
+#' Identifies constant features of an object.  Generic, with method for data.frame.
 #' 
 #' @export
 #' @keywords internal
@@ -36,8 +36,14 @@ constant <- function(x,...)UseMethod('constant')
 #' Theoph <- group_by(Theoph, Subject)
 #' constant(Theoph)                      # Subject Wt Dose Study
 #' constant(Theoph, Study)               # Study
+#' foo <- data.frame(x = 1)
+#' foo <-  group_by(foo, x)
+#' class(foo) <- c('foo', class(foo))
+#' stopifnot(identical(class(foo), class(constant(foo))))
 constant.data.frame <- function(x,...){
   
+  theClass <- class(x)
+
   # determine the legitimate un-named arguments
   args <- quos(...)
   args <- lapply(args,f_rhs)
@@ -83,7 +89,10 @@ constant.data.frame <- function(x,...){
   x %<>% select(all_of(nms))
   
   # find distinct combinations of values
+  # but distinct() drops "decorated" from "decorated", "grouped_df"
+  # unique() does not
   x %<>% distinct # per help file, columns not modified since ... is empty.
+  class(x) <- theClass
   return(x)
 }
 
